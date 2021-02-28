@@ -1,0 +1,55 @@
+@import "../../scss/variables.scss";
+
+.posts {
+    &__item {
+        display: flex;
+        justify-content: space-between;
+        padding: 15px 0;
+        border-bottom: 1px solid $color_primary;
+
+        &:last-child {
+            border-bottom: 0;
+        }
+
+        &_important {
+            color: $color_success;
+
+        }
+    }
+
+    &__name {
+        margin-right: 10px;
+    }
+
+    &__action {
+        align-self: center;
+        display: flex;
+        align-items: center;
+
+        i {
+            margin-left: 5px;
+            cursor: pointer;
+
+            &.fa-star {
+                color: $color_success;
+
+                .posts__item_important & {
+                    color: $color_primary;
+                }
+            }
+
+            &.fa-trash {
+                color: $color_primary;
+            }
+
+            &.fa-heart {
+                color: $color_primary;
+
+                .posts__item_like & {
+                    color: $color_danger;
+                }
+            }
+
+        }
+    }
+}

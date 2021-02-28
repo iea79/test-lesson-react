@@ -1,0 +1,13 @@
+.addPost {
+    display: flex;
+
+    &__field {
+        flex-grow: 1;
+
+    }
+
+    &__btn {
+        .btn {}
+    }
+
+}

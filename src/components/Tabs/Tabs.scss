@@ -1,0 +1,46 @@
+@import "../../scss/variables";
+
+.tabs {
+    margin: 20px 0;
+
+    &__top {
+        display: flex;
+        margin-bottom: 10px;
+        border-bottom: 1px solid $color_primary;
+    }
+
+    &__item {
+        border: 1px solid $color_primary;
+        border-bottom: 0;
+        border-radius: 5px 5px 0 0;
+        margin-right: 2px;
+        padding: 5px 15px;
+        font-size: 13px;
+        cursor: pointer;
+        transition: 0.3s;
+
+        &:hover {
+            background-color: lighten($color_primary, 45%);
+            border-color: lighten($color_primary, 35%);
+        }
+
+        &.active {
+            background-color: $color_primary;
+            border-color: $color_primary;
+            color: $color_withe;
+            cursor: default;
+        }
+    }
+
+    &__pane {
+        display: none;
+
+        &.active {
+            display: flex;
+        }
+    }
+
+    .float {
+        // float: left;
+    }
+}

@@ -1,0 +1,16 @@
+.search {
+    display: flex;
+
+    &__field {
+        flex-grow: 1;
+    }
+
+    &__action {
+        display: flex;
+
+        .btn {
+            // margin-left: 10px;
+        }
+    }
+
+}
