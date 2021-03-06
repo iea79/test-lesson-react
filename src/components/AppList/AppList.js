@@ -8,13 +8,12 @@ const AppList = ({posts, onDelete, onToggleImportant, onToggleLiked}) => {
     const elements = posts.map((item) => {
         const {id, ...otherProps} = item;
         return (
-            <div key={id}>
-                <AppListItem
-                    {...otherProps}
-                    onDelete={() => onDelete(id)}
-                    onToggleImportant={() => onToggleImportant(id)}
-                    onToggleLiked={() => onToggleLiked(id)} />
-            </div>
+            <AppListItem
+                key={id}
+                {...otherProps}
+                onDelete={() => onDelete(id)}
+                onToggleImportant={() => onToggleImportant(id)}
+                onToggleLiked={() => onToggleLiked(id)} />
         )
     })
 

@@ -5,14 +5,14 @@
         display: flex;
         justify-content: space-between;
         padding: 15px 0;
-        border-bottom: 1px solid $color_primary;
+        border-bottom: 1px solid lighten($color_primary, 30%);
 
         &:last-child {
             border-bottom: 0;
         }
 
         &_important {
-            color: $color_success;
+            color: lighten($color_primary, 3%);
 
         }
     }
@@ -31,15 +31,20 @@
             cursor: pointer;
 
             &.fa-star {
-                color: $color_success;
+                color: $color_primary;
 
                 .posts__item_important & {
-                    color: $color_primary;
+                    color: $color_success;
                 }
             }
 
             &.fa-trash {
                 color: $color_primary;
+
+                &.disabled {
+                    color: lighten($color_primary, 20%);
+                    cursor: default;
+                }
             }
 
             &.fa-heart {

@@ -7,27 +7,32 @@ import AppList from '../AppList';
 import AppAddPost from '../AppAddPost';
 import Tabs from '../Tabs';
 
+import GetData from '../../services/getData';
+
 export default class App extends Component {
 
     state = {
         data: [],
         term: '',
         filter: 'all',
+        error: false,
+        newId: 100
     }
 
-    newId = this.state.data.length;
-    dataOffset = 10;
+    getData = new GetData();
+
+    dataOffset = 30;
 
     componentDidMount() {
         this.getAllPosts();
     }
 
     getAllPosts() {
-        fetch('https://jsonplaceholder.typicode.com/posts/')
-            .then(response => response.json())
+        this.getData.getAllPosts()
             .then(data => this.setState({data}))
-            .catch(err => {console.log(err)})
+            .catch(() => this.setState({error: true}));
 
+        this.getData.getUser(7);
     }
 
     deleteItem = (id) => {
@@ -42,13 +47,13 @@ export default class App extends Component {
         })
     }
 
-    addItem = (body) => {
-
+    addItem = (body, title) => {
+        let id = this.state.newId;
         const newEl = {
-            title: 'New post',
-            body: body,
-            important: false,
-            id: ++this.newId
+            userId: 8,
+            id: ++id,
+            title: title,
+            body: body
         }
         console.log(newEl);
 
@@ -58,7 +63,8 @@ export default class App extends Component {
             console.log(updArr);
 
             return {
-                data: updArr
+                data: updArr,
+                newId: id
             }
         })
     }
@@ -89,7 +95,7 @@ export default class App extends Component {
         }
 
         return items.filter((item) => {
-            return item.body.indexOf(prop) > -1
+            return item.title.indexOf(prop) > -1
         })
     }
 
@@ -110,7 +116,11 @@ export default class App extends Component {
     }
 
     render() {
-        const {data, term, filter} = this.state;
+        const {data, term, filter, error} = this.state;
+
+        if (error) {
+            return <div className="container">Error loading service</div>
+        }
         const allPosts = data.length;
         const liked = data.filter(item => item.like).length;
         const important = data.filter(item => item.important).length;

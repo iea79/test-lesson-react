@@ -8,8 +8,8 @@ export default class AppSearch extends Component {
     };
 
     buttons = [
-        {name: 'all', label: 'Все'},
-        {name: 'like', label: 'Понравилось'}
+        {name: 'all', label: 'All'},
+        {name: 'like', label: 'Liked posts'}
     ];
 
     onUpdateSearch = (e) => {

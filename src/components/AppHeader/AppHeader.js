@@ -5,8 +5,8 @@ const AppHeader = ({allPosts, liked, important}) => {
     return (
         <div className="container">
             <header className="header">
-                <div className="user">Евгений Иванов</div>
-                <div className="searchRezult">{allPosts} записей, из них понравилось {liked}, добавлено в избранное {important}</div>
+                <div className="user">Current user</div>
+                <div className="searchRezult">{allPosts} posts of which I liked {liked}, added to favorites {important}</div>
             </header>
         </div>
     )
