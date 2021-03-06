@@ -2,20 +2,17 @@ import React, {Component} from 'react';
 import './AppSearch.scss';
 
 export default class AppSearch extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            term: ''
-        };
-        this.buttons = [
-            {name: 'all', label: 'Все'},
-            {name: 'like', label: 'Понравилось'}
-        ];
 
-        this.onUpdateSearch = this.onUpdateSearch.bind(this);
-    }
+    state = {
+        term: ''
+    };
 
-    onUpdateSearch(e) {
+    buttons = [
+        {name: 'all', label: 'Все'},
+        {name: 'like', label: 'Понравилось'}
+    ];
+
+    onUpdateSearch = (e) => {
         const term = e.target.value;
         this.setState({term});
         this.props.onUpdateSearch(term);

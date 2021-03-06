@@ -8,37 +8,33 @@ import AppAddPost from '../AppAddPost';
 import Tabs from '../Tabs';
 
 export default class App extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            data: [
-                {label: 'Going to learn React', important: true, like: false, id: '1212'},
-                {label: 'Thats is so good', important: false, like: false, id: '1217'},
-                {label: 'I need a break...', important: false, like: false, id: '1204'}
-            ],
-            term: '',
-            filter: 'all'
-        };
-        this.newId = 4;
-        this.deleteItem = this.deleteItem.bind(this);
-        this.addItem = this.addItem.bind(this);
-        this.onToggleImportant = this.onToggleImportant.bind(this);
-        this.onToggleLiked = this.onToggleLiked.bind(this);
-        this.setProp = this.setProp.bind(this);
-        this.searchPosts = this.searchPosts.bind(this);
-        this.onUpdateSearch = this.onUpdateSearch.bind(this);
-        this.onFilteredItem = this.onFilteredItem.bind(this);
-        this.onFilterSelect = this.onFilterSelect.bind(this);
+
+    state = {
+        data: [],
+        term: '',
+        filter: 'all',
     }
 
-    deleteItem(id) {
+    newId = this.state.data.length;
+    dataOffset = 10;
+
+    componentDidMount() {
+        this.getAllPosts();
+    }
+
+    getAllPosts() {
+        fetch('https://jsonplaceholder.typicode.com/posts/')
+            .then(response => response.json())
+            .then(data => this.setState({data}))
+            .catch(err => {console.log(err)})
+
+    }
+
+    deleteItem = (id) => {
         this.setState(({data}) => {
             const index = data.findIndex(elem => elem.id === id);
 
-            const before = data.slice(0, index);
-            const after = data.slice(index + 1);
-
-            const newArr = [...before, ...after];
+            const newArr = [...data.slice(0, index), ...data.slice(index + 1)];
 
             return {
                 data: newArr
@@ -46,12 +42,13 @@ export default class App extends Component {
         })
     }
 
-    addItem(body) {
+    addItem = (body) => {
 
         const newEl = {
-            label: body,
+            title: 'New post',
+            body: body,
             important: false,
-            id: this.newId++
+            id: ++this.newId
         }
         console.log(newEl);
 
@@ -66,15 +63,15 @@ export default class App extends Component {
         })
     }
 
-    onToggleImportant(id) {
+    onToggleImportant = (id) => {
         this.setProp(this.state.data, id, 'important');
     }
 
-    onToggleLiked(id) {
+    onToggleLiked = (id) => {
         this.setProp(this.state.data, id, 'like');
     }
 
-    setProp(data, id, prop) {
+    setProp = (data, id, prop) => {
         this.setState(({data}) => {
             const newArr = [...data];
             const index = newArr.findIndex(elem => elem.id === id);
@@ -86,29 +83,29 @@ export default class App extends Component {
         })
     }
 
-    searchPosts(items, prop) {
+    searchPosts = (items, prop) => {
         if (prop.length === 0) {
             return items
         }
 
         return items.filter((item) => {
-            return item.label.indexOf(prop) > -1
+            return item.body.indexOf(prop) > -1
         })
     }
 
-    onUpdateSearch(term) {
+    onUpdateSearch = (term) => {
         this.setState({term});
     }
 
-    onFilteredItem(items, filter) {
+    onFilteredItem = (items, filter) => {
         if (filter === 'like') {
-            return items.filter(item => item.like);
+            return items.filter(item => item.like).slice(0, this.dataOffset);
         } else {
-            return items;
+            return items.slice(0, this.dataOffset);
         }
     }
 
-    onFilterSelect(filter) {
+    onFilterSelect = (filter) => {
         this.setState({filter});
     }
 

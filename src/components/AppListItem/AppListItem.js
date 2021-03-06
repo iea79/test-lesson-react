@@ -3,17 +3,20 @@ import './AppListItem.scss';
 
 export default class AppListItem extends Component {
     render() {
-        const {label, onDelete, onToggleImportant, onToggleLiked, important, like} = this.props;
+        const {title, body, onDelete, onToggleImportant, onToggleLiked, important, like} = this.props;
         let importantClass = "posts__item";
         if (important) {
-            importantClass += " posts__item_important"
+            importantClass += " posts__item_important";
         }
         if (like) {
-            importantClass += " posts__item_like"
+            importantClass += " posts__item_like";
         }
         return (
             <div className={importantClass}>
-                <div className="posts__name">{label}</div>
+                <div className="posts__name">
+                    <h4>{title}</h4>
+                    {body}
+                </div>
                 <div className="posts__action">
                     <i
                         className="fa fa-star"
@@ -28,6 +31,6 @@ export default class AppListItem extends Component {
                         onClick={onToggleLiked}></i>
                 </div>
             </div>
-        )
+        );
     }
 }

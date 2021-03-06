@@ -2,28 +2,23 @@ import React, {Component} from 'react';
 import './AppAddPost.scss';
 
 export default class AppAddPost extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            post: ''
-        };
 
-        this.onValueChange = this.onValueChange.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
-    }
+    state = {
+        post: ''
+    };
 
-    onValueChange(e) {
+    onValueChange = (e) => {
         this.setState({
             post: e.target.value
-        })
+        });
     }
 
-    onSubmit(e) {
+    onSubmit = (e) => {
         e.preventDefault();
         this.props.onAdd(this.state.post);
         this.setState({
             post: ''
-        })
+        });
     }
 
     render() {
@@ -44,6 +39,6 @@ export default class AppAddPost extends Component {
                     </button>
                 </div>
             </form>
-        )
+        );
     }
 }

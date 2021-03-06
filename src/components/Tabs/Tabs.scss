@@ -14,7 +14,7 @@
         border-bottom: 0;
         border-radius: 5px 5px 0 0;
         margin-right: 2px;
-        padding: 5px 15px;
+        padding: 5px 10px;
         font-size: 13px;
         cursor: pointer;
         transition: 0.3s;
@@ -34,9 +34,10 @@
 
     &__pane {
         display: none;
+        font-size: 14px;
 
         &.active {
-            display: flex;
+            display: block;
         }
     }
 
